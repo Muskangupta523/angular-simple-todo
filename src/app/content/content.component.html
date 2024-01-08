@@ -1,0 +1,37 @@
+<div class="on">
+  <div class="one">
+    <h2>Todo List</h2>
+  
+    <div>
+      <!-- First input for text -->
+      <input type="text" [(ngModel)]="newTaskText" placeholder="Enter a new task" />
+
+      <!-- Second input for number -->
+      <input type="number" [(ngModel)]="newTaskNumber" placeholder="tasking" />
+
+      <button (click)="addTask()">Add Task</button>
+    </div>
+  
+    <ul>
+      
+      <li *ngFor="let task of tasks">
+        <span *ngIf="task.id !== editingTaskId">{{ task.text }}</span>
+        <input
+          *ngIf="task.id === editingTaskId"
+          type="text"
+          [(ngModel)]="task.text"
+        />
+        <button (click)="startEditing(task.id)" *ngIf="task.id !== editingTaskId">
+          Edit
+        </button>
+        <button (click)="cancelEditing()" *ngIf="task.id === editingTaskId">
+          Cancel
+        </button>
+        <button (click)="saveTaskChanges(task)" *ngIf="task.id === editingTaskId">
+          Save
+        </button>
+        <button (click)="removeTask(task)">Remove</button>
+      </li>
+    </ul>
+  </div>
+</div>
