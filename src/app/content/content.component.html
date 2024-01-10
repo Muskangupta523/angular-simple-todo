@@ -7,12 +7,12 @@
        plz type your message..
         <input type="text" name="name" [(ngModel)]="newTaskText" #nameField="ngModel" required minlength="7" pattern="/^[a-zA-Z*]/$" [ngClass]="signupform.submitted && nameField.invalid?'feild-error' : '' "
         placeholder="Enter a new task" />
-        <div class="error" *ngIf="(nameField.touched || nameField.dirty || signupform.submitted ) && nameField.invalid">
-         <div *ngIf="nameField.errors?.['required']" >Name required  </div>
-         <div *ngIf="nameField.errors?.['pattern']"> only english alphabets are allowed</div>
-         <div *ngIf="nameField.errors?.['minlength']"> Name feild should be minimum {{nameField.errors?.['minlength'].requiredLength}} characters
-        Only {{nameField.errors?.['minlength'].actualLength}} characters typed
+
         </div>
+        <div class="error" *ngIf="(nameField.touched || nameField.dirty) && nameField.invalid && nameField.errors?.['required']">/*Name feild is required*/</div>
+        <div class="error" *ngIf="(nameField.touched || nameField.dirty) && nameField.invalid && nameField.errors?.['minlength']">/*Name should be minimum {{nameField.errors?.['minlength'].requiredLength}} characters.
+        Only {{nameField.errors?.['minlength'].actualLength}} characters typed*/
+        <div  class="error" *ngIf="(signupform.submitted && !isTextValid)">Please add something</div>
         </div>
 
     <div>
@@ -70,4 +70,38 @@
     <button (click)="removeTask(task)">Remove</button>
   </li>
 </ul>
+
+   
+<!-- <ul>
+  <li *ngFor="let task of tasks">
+    <input class="checkbox" type="checkbox">
+    <span *ngIf="task.id !== editingTaskId">
+      text1- {{ task.text}} -->
+     <!-- text1- {{ task.text}} , text2-{{ task.text2 }} - Number: {{ task.id }} -->
+    <!-- </span>
+    <input
+      *ngIf="task.id === editingTaskId"
+      type="text"
+      [(ngModel)]="task.text"
+    /> -->
+    <!--  input for text2 if needed -->
+    <!-- <input
+      *ngIf="task.id === editingTaskId"
+      type="text"
+      [(ngModel)]="task.text2"
+    /> -->
+    <!-- <button (click)="startEditing(task.id)" *ngIf="task.id !== editingTaskId">
+      Edit
+    </button>
+    <button (click)="cancelEditing()" *ngIf="task.id === editingTaskId">
+      Cancel
+    </button>
+    <button (click)="saveTaskChanges(task)" *ngIf="task.id === editingTaskId">
+      Save
+    </button>
+    <button (click)="removeTask(task)">Remove</button>
+  </li>
+</ul> -->
+<!-- ... -->
+
 <!-- ... -->

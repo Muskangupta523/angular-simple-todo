@@ -141,7 +141,7 @@
     font-family: 'Times New Roman', Times, serif;
   }
   .error{
-    font-size: 0.6rem ;
+    font-size: 0.1rem ;
     color: red;
   }
   input.ng-invalid.ng-touched, input.ng-invalid.ng-dirty{
@@ -150,6 +150,8 @@
   .error {
     color: red;
     font-size: 12px;
+    margin-left: 188px;
+    margin-top: 2px;
   }
   
   .status {

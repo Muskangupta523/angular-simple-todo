@@ -11,6 +11,7 @@ export class ContentComponent implements OnInit {
   
   
   tasks: { id: number; text: string; }[] = [];
+  
   newTaskText: string = '';
   // newTaskNumber: number | null = null;
   // newTaskText2: string = '';
