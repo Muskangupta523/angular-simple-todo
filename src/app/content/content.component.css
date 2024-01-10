@@ -36,6 +36,7 @@
   h2 {
     color: #333;
     margin-left: 16px;
+    margin-top: 15px;
   }
   
   div {
@@ -80,7 +81,7 @@
   }
   
   button:hover {
-    background-color: #45a049;
+    background-color: #a0b028;
   }
   
   ul {
@@ -89,8 +90,8 @@
   }
   
   li {
-    margin-right: 7px;
-    margin-left: 15px;
+    margin-right: 15px;
+    margin-left: 5px;
     padding: 10px;
     border: 4px solid #d5efb5;
     background-color: #f4f7f8;
@@ -139,6 +140,48 @@
     font: 500;
     font-family: 'Times New Roman', Times, serif;
   }
+  .error{
+    font-size: 0.6rem ;
+    color: red;
+  }
+  input.ng-invalid.ng-touched, input.ng-invalid.ng-dirty{
+    outline: 0.1rem solid red;
+  }
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .status {
+    margin-top: 5px;
+    font-size: 12px;
+  }
+  
+  .status.touched {
+    color: #ea0e0e;
+  }
+  
+  .status.dirty {
+    color: #ec0f0f;
+  }
+  
+  .status.valid {
+    color: green;
+  }
+  .two{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 500;
+    margin-left: 20px;
+    color: #333;
+  }
+  .checkbox{
+    margin-right: 4px;
+    
+  }
+  /* span{
+    text-decoration: line-through;
+  } */
+  
   /* Add styles for the edit buttons */
   /* .edit-buttons button {
     margin-left: 1px;

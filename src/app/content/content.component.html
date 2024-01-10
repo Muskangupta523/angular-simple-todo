@@ -2,17 +2,39 @@
   <div class="one">
     <h2>Todo List</h2>
   
-    <div>
-      <!-- First input for text -->
-      <input type="text" [(ngModel)]="newTaskText" placeholder="Enter a new task" />
-      <div class="first" *ngIf="!isTextValid">Please enter a valid lowercase string with a minimum length of 7.</div>
+    <form #signupform="ngForm">
+      <div class="two">
+       plz type your message..
+        <input type="text" name="name" [(ngModel)]="newTaskText" #nameField="ngModel" required minlength="7" pattern="/^[a-zA-Z*]/$" [ngClass]="signupform.submitted && nameField.invalid?'feild-error' : '' "
+        placeholder="Enter a new task" />
+        <div class="error" *ngIf="(nameField.touched || nameField.dirty || signupform.submitted ) && nameField.invalid">
+         <div *ngIf="nameField.errors?.['required']" >Name required  </div>
+         <div *ngIf="nameField.errors?.['pattern']"> only english alphabets are allowed</div>
+         <div *ngIf="nameField.errors?.['minlength']"> Name feild should be minimum {{nameField.errors?.['minlength'].requiredLength}} characters
+        Only {{nameField.errors?.['minlength'].actualLength}} characters typed
+        </div>
+        </div>
 
+    <div>
+      
+      <div>
+       
+       <!-- <input type="text" name="name" [(ngModel)]="newTaskText" #nameField="ngModel" required minlength="7" placeholder="Enter a new task" />
+<div class="error" *ngIf="nameField.touched && nameField.invalid">
+  <div *ngIf="nameField.errors.required">Name field is required.</div>
+  <div *ngIf="nameField.errors.minlength">Name must be at least 7 characters long.</div>
+</div>
+<div class="status" [ngClass]="{ 'touched': nameField.touched, 'dirty': nameField.dirty, 'valid': nameField.valid }"></div>
+
+       -->
+      
+      
       <!-- Second input for number -->
-      <input type="number" [(ngModel)]="newTaskNumber" placeholder=" number" />
+      <!-- <input type="number" [(ngModel)]="newTaskNumber" placeholder=" number" />
       <div class="Second" *ngIf="!isNumberValid">Please enter a valid numeric value.</div>
 
       <input type="text2" [(ngModel)]="newTaskText2" placeholder="Enter a new task2" />
-      <div class="third" *ngIf="!isText2Valid">Please enter a valid uppercase string with minimum length of 9.</div>
+      <div class="third" *ngIf="!isText2Valid">Please enter a valid uppercase string with minimum length of 9.</div> -->
 
       <button (click)="addTask()"  [disabled]="!isInputValid()">Add Task</button>
     </div>
@@ -20,8 +42,10 @@
     
 <ul>
   <li *ngFor="let task of tasks">
+    <input class="checkbox" type="checkbox">
     <span *ngIf="task.id !== editingTaskId">
-     text1- {{ task.text}} , text2-{{ task.text2 }} - Number: {{ task.id }}
+      text1- {{ task.text}}
+     <!-- text1- {{ task.text}} , text2-{{ task.text2 }} - Number: {{ task.id }} -->
     </span>
     <input
       *ngIf="task.id === editingTaskId"
@@ -29,11 +53,11 @@
       [(ngModel)]="task.text"
     />
     <!--  input for text2 if needed -->
-    <input
+    <!-- <input
       *ngIf="task.id === editingTaskId"
       type="text"
       [(ngModel)]="task.text2"
-    />
+    /> -->
     <button (click)="startEditing(task.id)" *ngIf="task.id !== editingTaskId">
       Edit
     </button>
