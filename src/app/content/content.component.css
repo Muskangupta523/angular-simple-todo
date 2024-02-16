@@ -1,4 +1,4 @@
-/* Add some basic styling to make the todo list more visually appealing */
+
   *{
     margin: 0;
     padding: 0;
@@ -29,7 +29,7 @@
    border-radius: 20px;
    border: 4px solid #d6e909 ;
   
-   box-shadow: 15px 10px 15px 4px rgb(85, 85, 75 );
+   box-shadow: 15px 10px 40px 4px rgb(85, 85, 75 );
   }
   
   
@@ -42,6 +42,12 @@
   div {
     margin-bottom: 15px;
   }
+  input{
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
   input[type="text"] {
     width: 100px;
@@ -50,28 +56,11 @@
     border: 1px solid black;
     border-radius: 8px;
   }
-
-  input[type="text2"]{
-    width: 100px;
-    padding: 20px;
-    margin-left: 10px;
-    margin-top: 5px;
-    border: 1px solid black;
-    border-radius: 8px;
-  }
-  input[type="number"]{
-    width: 100px;
-    margin-left: 10px;
-    margin-top: 3px;
-        height: 55px;
-        border: 1px solid black;
-        border-radius: 8px;
-  }
+ 
   
-  button {
-    width: 100px;
-    margin-left: 15px;
-    padding: 8px 12px;
+  .btn {
+    width: 50px;
+    padding: 5px;
     background-color: #d1d962;
     color: rgb(18, 16, 16);
     border: none;
@@ -80,7 +69,7 @@
    
   }
   
-  button:hover {
+  .btn:hover,#actionbtn:hover {
     background-color: #a0b028;
   }
   
@@ -101,91 +90,51 @@
     font-size: 500;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 500;
+    height: auto;
   }
-  
-  li span {
-    flex-grow: 1;
-  }
-  
-  input[type="text"] {
-    width: 200px;
-  }
-  
+ /* span{
+  width: auto;
+  margin-right: 40px;
+ } */
+ h1{
+  font-weight: 500;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 30px;
+  margin-left: 10px;
+  margin-bottom: 18px;
+ }
+ three .li{
+  width: 100px;
+  height: 50px;
+ }
 
-  .first {
-    font-size: 18px;
-    margin-left: 10px;
-    margin-right: 5px;
-    margin-top: 5px;
-    color: #333;
-    font: 500;
-    font-family: 'Times New Roman', Times, serif;
+#actionbtn{
+  width: 50px;
+    padding: 5px;
+    background-color: #d1d962;
+    color: rgb(18, 16, 16);
+    border: none;
+    cursor: pointer;
+    box-shadow: 6px 6px  rgb(152, 161, 27);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+span{
+  font-size: 20px;
+}
+input[type="date"]{
+  width: 100px;
+ margin-top: 20px;
+margin-left: 10px;
+  margin-bottom: 20px;
+}
+.error{
+  font-size: 0.6rem;
+  color: red;
+  margin-left: 10px;
+}
+  button1{
+    width: 60px;
+    background-color: aqua;
   }
-  .Second{
-    font-size: 18px;
-    margin-left: 10px;
-    margin-right: 5px;
-    margin-top: 5px;
-    color: #333;
-    font: 500;
-    font-family: 'Times New Roman', Times, serif;
-  }
-
-  .third{
-    font-size: 18px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 5px;
-    color: #333;
-    font: 500;
-    font-family: 'Times New Roman', Times, serif;
-  }
-  .error{
-    font-size: 0.1rem ;
-    color: red;
-  }
-  input.ng-invalid.ng-touched, input.ng-invalid.ng-dirty{
-    outline: 0.1rem solid red;
-  }
-  .error {
-    color: red;
-    font-size: 12px;
-    margin-left: 188px;
-    margin-top: 2px;
-  }
-  
-  .status {
-    margin-top: 5px;
-    font-size: 12px;
-  }
-  
-  .status.touched {
-    color: #ea0e0e;
-  }
-  
-  .status.dirty {
-    color: #ec0f0f;
-  }
-  
-  .status.valid {
-    color: green;
-  }
-  .two{
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: 500;
-    margin-left: 20px;
-    color: #333;
-  }
-  .checkbox{
-    margin-right: 4px;
-    
-  }
-  /* span{
-    text-decoration: line-through;
-  } */
-  
-  /* Add styles for the edit buttons */
-  /* .edit-buttons button {
-    margin-left: 1px;
-  }
-   */

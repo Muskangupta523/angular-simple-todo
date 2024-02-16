@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl,Validators } from '@angular/forms';
-
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-content',
@@ -8,105 +7,106 @@ import { FormControl,Validators } from '@angular/forms';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
-  
-  
-  tasks: { id: number; text: string; }[] = [];
-  
-  newTaskText: string = '';
-  // newTaskNumber: number | null = null;
-  // newTaskText2: string = '';
-  editingTaskId: number | null = null;
+  property!: string;
+  datepicker: any;
+  array: { texts: string, dates: string }[] = [];
+  mus: any;
+  completearray: { texts: string, dates: string }[] = [];
+  today: any;
   isTextValid: boolean = true;
   isTextTouched: boolean = false;
-  // isNumberValid: boolean = true;
-  // isText2Valid: boolean = true;
-  newTaskTextControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(7)
-  ]);
+  minDate: any;
+  maxDate: any;
+formSubmitted: boolean = false;
+currentDate:any=new Date();
 
+
+constructor() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1; // January is 0
+  const day = today.getDate();
+  this.minDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+  this.maxDate = '2029-10-28';
+}
 
   ngOnInit() {
-    // Load tasks from local storage on component initialization
-    this.loadTasksFromLocalStorage();
-    this.newTaskTextControl.markAsTouched();
+    this.getlocalstorage();
+   
   }
 
-  updateLocalStorage() {
-    // Save tasks to local storage whenever there's a change
-    localStorage.setItem('tasks', JSON.stringify(this.tasks));
-  }
 
-  loadTasksFromLocalStorage() {
-    // Load tasks from local storage
-    const storedTasks = localStorage.getItem('tasks');
-    this.tasks = storedTasks ? JSON.parse(storedTasks) : [];
-  }
-
-  addTask() {
+  addtask() {
     if (this.isInputValid()) {
-      const newTask = {
-        id: Date.now(),
-        text: this.newTaskText.trim(),
-        // number: this.newTaskNumber!,
-        // text2: this.newTaskText2.trim()
-      };
 
-      this.tasks.push(newTask);
-      this.newTaskText = '';
-      // this.newTaskNumber = null;
-      // this.newTaskText2 = '';
-      this.isTextValid = true;
-      // this.isNumberValid = true;
-      // this.isText2Valid = true;
 
-      this.updateLocalStorage();
-      this.newTaskTextControl.reset(); // Reset the form control
-      this.newTaskTextControl.markAsTouched(); // Mark as touched to trigger validation messages
+      if (this.mus == null) {
+        this.array.push({ texts: this.property, dates: this.datepicker });
+        this.property = '';
+        this.datepicker = '';
+        this.formSubmitted = false;
+        this.isTextTouched= false;
+      } else {
+        this.array[this.mus].texts = this.property;
+        this.array[this.mus].dates = this.datepicker;
+        this.property = '';
+        this.datepicker = '';
+        this.formSubmitted = false;
+        this.isTextTouched= false;
+        this.mus = null;
+      }
+      
 
-      // Rest of your code...
-    } else {
-      console.log("Please fill in the form correctly.");
     }
-  
+   
+    this.setlocalstorage();
   }
 
+  deletetask(i: number) {
+    this.array.splice(i, 1);
+    this.setlocalstorage();
+  }
+
+  edittask(i: number) {
+    this.mus = i;
+    this.property = this.array[this.mus].texts;
+    this.datepicker = this.array[this.mus].dates;
+  }
+
+  setlocalstorage() {
+    localStorage.setItem('data', JSON.stringify(this.array));
+    localStorage.setItem('data', JSON.stringify(this.completearray));
+  }
+
+  getlocalstorage() {
+    const item = localStorage.getItem('data');
+    if (item !== null && item !== undefined) {
+      this.array = JSON.parse(item);
+      this.completearray = JSON.parse(item);
+    }
+  }
+
+  donetask(i: number) {
+    const completedTask = this.array.splice(i, 1)[0];
+    this.completearray.push(completedTask);
+    console.log("h",this.completearray);
+    this.setlocalstorage();
+  }
+
+  pendingtask(i: number) {
+    const pendingTask = this.completearray.splice(i, 1)[0];
+    this.array.push(pendingTask);
+    this.setlocalstorage();
+  }
   isInputValid(): boolean {
-    // Validate newTaskText
-    this.isTextValid = /^[a-z]{7,}$/.test(this.newTaskText.trim());
+    const currentDate = new Date().toISOString().slice(0, 10);
+    this.isTextValid = /^[a-z]{7,}$/.test(this.property.trim())  && this.datepicker !== null && this.datepicker !== undefined;;
+
+
     this.isTextTouched = true;
 
-    // Validate newTaskNumber
-    // this.isNumberValid = /^[0-9]+$/.test(String(this.newTaskNumber));
-
-    // Validate newTaskText2
-    // this.isText2Valid= /^[A-Z]{7,}$/.test(this.newTaskText2.trim());
-    // this.isText2Valid = typeof this.newTaskText2 === 'string' && this.newTaskText2.trim() !== '';
-
-    // Return true only if all inputs are valid
-    return this.isTextValid;
-    
-    // return this.isTextValid && this.isNumberValid && this.isText2Valid;
-  }
-
-  removeTask(task: { id: number; text: string }) {
-    const index = this.tasks.findIndex(t => t.id === task.id);
-    this.tasks.splice(index, 1);
-    this.updateLocalStorage();
-  }
-
-  startEditing(taskId: number) {
-    this.editingTaskId = taskId;
-  }
-
-  cancelEditing() {
-    this.editingTaskId = null;
-  }
-
-  saveTaskChanges(task: { id: number; text: string }) {
-    const index = this.tasks.findIndex(t => t.id === task.id);
-    this.tasks[index].text = task.text;
-    this.editingTaskId = null;
-    this.updateLocalStorage();
+    return /^[a-z]{7,}$/.test(this.property.trim()) && this.datepicker >= currentDate;
   }
 }
+
+
