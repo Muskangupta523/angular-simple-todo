@@ -44,14 +44,14 @@ constructor() {
         this.array.push({ texts: this.property, dates: this.datepicker });
         this.property = '';
         this.datepicker = '';
-        this.formSubmitted = false;
-        this.isTextTouched= false;
+       
+        
       } else {
         this.array[this.mus].texts = this.property;
         this.array[this.mus].dates = this.datepicker;
         this.property = '';
         this.datepicker = '';
-        this.formSubmitted = false;
+       
         this.isTextTouched= false;
         this.mus = null;
       }
@@ -75,14 +75,17 @@ constructor() {
 
   setlocalstorage() {
     localStorage.setItem('data', JSON.stringify(this.array));
-    localStorage.setItem('data', JSON.stringify(this.completearray));
+    localStorage.setItem('datatwo', JSON.stringify(this.completearray));
   }
 
   getlocalstorage() {
     const item = localStorage.getItem('data');
+    const itemtwo = localStorage.getItem('datatwo');
     if (item !== null && item !== undefined) {
-      this.array = JSON.parse(item);
-      this.completearray = JSON.parse(item);
+      this.array = JSON.parse(item);  
+    }
+    if (itemtwo !== null && itemtwo !== undefined) {
+      this.completearray = JSON.parse(itemtwo);
     }
   }
 
@@ -90,12 +93,14 @@ constructor() {
     const completedTask = this.array.splice(i, 1)[0];
     this.completearray.push(completedTask);
     console.log("h",this.completearray);
+
     this.setlocalstorage();
   }
 
   pendingtask(i: number) {
     const pendingTask = this.completearray.splice(i, 1)[0];
     this.array.push(pendingTask);
+    console.log("k",this.array)
     this.setlocalstorage();
   }
   isInputValid(): boolean {

@@ -20,10 +20,11 @@
     align-items: center;
     justify-content: center;
     
+    
   }
   .one{
-    width: 30vw;
-    height: auto;
+    width: 100vw;
+    height: 95vh;
    margin-top: 30px;
    background:transparent;
    border-radius: 20px;
@@ -60,10 +61,11 @@
   
   .btn {
     width: 50px;
-    padding: 5px;
+    padding:5px;
     background-color: #d1d962;
     color: rgb(18, 16, 16);
     border: none;
+  
     cursor: pointer;
     box-shadow: 6px 6px  rgb(152, 161, 27);
    
@@ -138,3 +140,4 @@ margin-left: 10px;
     width: 60px;
     background-color: aqua;
   }
+ 

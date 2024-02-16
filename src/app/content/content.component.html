@@ -1,50 +1,53 @@
 <div class="on">
   <div class="one">
     <h2>Todo List</h2>
-    
-    <div><input type="text"  [(ngModel)]="property" #namefeild="ngModel" required minlength="7" ></div>
-    <div class="error" *ngIf="isTextTouched && (namefeild.touched || namefeild.dirty) && namefeild.invalid && namefeild.errors?.['required']">Name Field is required</div>
-    <div class="error" *ngIf="isTextTouched && (namefeild.touched || namefeild.dirty) && namefeild.invalid && namefeild.errors?.['minlength']">Name Field should be minimum {{namefeild.errors?.['minlength'].requiredLength}} characters.</div>
 
-    <div><input type="date" [(ngModel)]="datepicker" #dateField="ngModel" required [min]="minDate" [max]="maxDate"></div>
-    <div class="error" *ngIf="isTextTouched && (dateField.touched || dateField.dirty) && dateField.invalid && dateField.errors?.['required']">Date Field is required</div>
-    <div class="error" *ngIf="isTextTouched && (dateField.touched || dateField.dirty) && dateField.invalid && datepicker && !datepicker.valid">Please enter a valid date.</div>
-    <div *ngIf="isTextTouched && dateField.errors?.['min'] && datepicker && datepicker < minDate">Date should not be a past date</div>
+    <div><input type="text" [(ngModel)]="property" #namefeild="ngModel" required minlength="7"></div>
+    <div class="error"
+      *ngIf="isTextTouched && (namefeild.touched || namefeild.dirty) && namefeild.invalid && namefeild.errors?.['required']">
+      Name Field is required</div>
+    <div class="error"
+      *ngIf="isTextTouched && (namefeild.touched || namefeild.dirty) && namefeild.invalid && namefeild.errors?.['minlength']">
+      Name Field should be minimum {{namefeild.errors?.['minlength'].requiredLength}} characters.</div>
 
-  
+    <div><input type="date" [(ngModel)]="datepicker" #dateField="ngModel" required [min]="minDate" [max]="maxDate">
+    </div>
+    <div class="error"
+      *ngIf="isTextTouched && (dateField.touched || dateField.dirty) && dateField.invalid && dateField.errors?.['required']">
+      Date Field is required</div>
+    <div class="error"
+      *ngIf="isTextTouched && (dateField.touched || dateField.dirty) && dateField.invalid && datepicker && !datepicker.valid">
+      Please enter a valid date.</div>
+    <div *ngIf="isTextTouched && dateField.errors?.['min'] && datepicker && datepicker < minDate">Date should not be a
+      past date</div>
 
 
-    <button  (click)="addtask()">Add Task</button>
-    
-    
+
+
+    <button (click)="addtask()">Add Task</button>
+
+
     <ul>
+      <h1>pending</h1>
       <li *ngFor="let task of array  let i=index">
-      
-       
-        <button id="actionbtn" (click)="donetask(i)">Mark</button>
-       
+        <input type="checkbox" id="checks" (click)="donetask(i)">
         <span>{{task.texts}}</span>
         <span>{{task.dates}}</span>
         <button class="btn" (click)="deletetask(i)">delete</button>
         <button class="btn" (click)="edittask(i)">edit</button>
       </li>
-
-
       <br>
-      
     </ul>
     <div class="three">
-   <ul>
-    <h1>complete</h1>
-    <li *ngFor="let done of completearray  let i =index" >
-      <button id="actionbtn" (click)="pendingtask(i)">Mark</button>
-      <span>{{done.texts}}</span>
-      <span>{{done.dates}}</span>
-    </li>
-    
-   </ul>
-
-  </div>
-
+      <ul>
+        <h1>complete</h1>
+        <li *ngFor="let done of completearray  let i =index">
+          
+          <input type="checkbox" checked (click)="pendingtask(i)">
+          <span>{{done.texts}}</span>
+          <span>{{done.dates}}</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
