@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContentComponent } from './content/content.component';
 import { FormsModule } from '@angular/forms'; 
+import { NgForm } from '@angular/forms';
 
 
 @NgModule({

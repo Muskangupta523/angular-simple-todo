@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-content',
@@ -20,7 +20,7 @@ export class ContentComponent implements OnInit {
 formSubmitted: boolean = false;
 currentDate:any=new Date();
 
-
+@ViewChild('myForm') myForm!: NgForm;
 constructor() {
   const today = new Date();
   const year = today.getFullYear();
@@ -38,14 +38,10 @@ constructor() {
 
   addtask() {
     if (this.isInputValid()) {
-
-
       if (this.mus == null) {
         this.array.push({ texts: this.property, dates: this.datepicker });
         this.property = '';
         this.datepicker = '';
-       
-        
       } else {
         this.array[this.mus].texts = this.property;
         this.array[this.mus].dates = this.datepicker;
@@ -55,7 +51,7 @@ constructor() {
         this.isTextTouched= false;
         this.mus = null;
       }
-      
+      this.myForm.resetForm();
 
     }
    
